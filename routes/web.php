@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,10 @@ Route::get('posts/{post}', function($slug){
         abort(404);
     }
 
-    $post = file_get_contents($path);
+    $post = Cache::remember("posts/{$slug}", 5, function () use ($path){
+        var_dump('file');
+        return file_get_contents($path);
+    });
     
     return view('post', [
         'post' => $post
