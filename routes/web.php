@@ -26,7 +26,6 @@ Route::get('posts/{post}', function($slug){
     }
 
     $post = Cache::remember("posts/{$slug}", 5, function () use ($path){
-        var_dump('file');
         return file_get_contents($path);
     });
     
