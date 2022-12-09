@@ -31,7 +31,8 @@ class Post
                 $document->slug,
                 $document->date,
                 $document->body(),
-        ));
+        ))
+        ->sortByDesc('date');
     }
 
 
